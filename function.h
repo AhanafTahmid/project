@@ -1,15 +1,12 @@
 #include <bits/stdc++.h>
 using namespace std;
 #include <graphics.h>
+
 //for the button and field
 #include "ui.h"
 
 
-char name[200] = "";
-char cpyname[200]="";
-//char sped[10][10]="";
-int spd=0;
-int Ac=0;
+
 
 //Below are the functions that will run in the application
 
@@ -55,6 +52,12 @@ void frame()
     bar(16, 16, 784, 504);//For Middle rectangle
     //Frame End
 }
+
+char name[200] = "";
+char cpyname[200]="";
+int spd=0;
+int Ac=0;
+
 
 vector<string> readDataFromFile(char* fileName)
 {
@@ -128,8 +131,8 @@ void startPracticing(int lavel, int time_limit)
     rectangle(200, 150, 600, 150);//To print a line
 
     Button back_button(15, 350, 250, 460, MAGENTA, "BACK");
-    Button re_start(251, 350, 500, 460, CYAN, "RE-START");
-    Button next(501, 350, 783, 460, MAGENTA, "NEXT LEVEL");
+    Button re_start(501, 350, 783, 460, CYAN, "RE-START");
+    //Button next(501, 350, 783, 460, MAGENTA, "NEXT LEVEL");
 
 
     char typed_word[50] = "";
@@ -143,7 +146,7 @@ void startPracticing(int lavel, int time_limit)
     {
         re_start.hover(GREEN);
         back_button.hover(GREEN);
-        next.hover(GREEN);
+        //next.hover(GREEN);
         //GetAsyncKeyState checks if the left mouse button is pressed using the GetAsyncKeyState
         //GetAsyncKeyState is for seeing where the mouse is moving
         //it will check whether a key is pressed or not.
@@ -155,11 +158,12 @@ void startPracticing(int lavel, int time_limit)
                 return;
             }
 
-            else if(next.cursor())
+            /*else if(next.cursor())
             {
                 if(time_limit==60)startPracticing(lavel, 120);
                 if(time_limit==120)startPracticing(lavel, 300);
-            }
+            }*/
+
             else if(back_button.cursor())
             {
                 if(lavel==1)Easy();
@@ -322,7 +326,7 @@ void Easy()
 
     Footer();
     new Field(0, 0, 800, 50, MAGENTA,WHITE, "Easy Labels");
-    Button char_one_mnt(200, 130, 600, 230, CYAN, "Type Characters Now");
+    Button char_one_mnt(200, 130, 600, 230, CYAN, "Type Characters");
     //Button char_two_mnt(200, 230, 600, 330, MAGENTA, "Label 2");
     //Button char_five_mnt(200, 330, 600, 430, CYAN, "Label 3");
     Button back(15, 425, 130, 465, BLUE, "BACK");
@@ -415,7 +419,7 @@ void Easy2()
     new Field(0, 0, 800, 50, MAGENTA,WHITE, "Hard Lavels");
 
 
-    Button word_one_mnt(200, 130, 600, 230, CYAN, "Label 1");
+    Button word_one_mnt(200, 130, 600, 230, CYAN, "Type Word by Word");
     //Button word_two_mnt(200, 230, 600, 330, MAGENTA, "Label 2");
     //Button word_five_mnt(200, 330, 600, 430, CYAN, "Label 3");
     Button back(15, 425, 130, 465, BLUE, "BACK");
@@ -449,7 +453,7 @@ void game2_start()
      Header();
      Footer();
     //creating the parameterized object from ui.h
-    Button easy(200, 130, 600, 230, MAGENTA, "  Type word by word");
+    Button easy(200, 130, 600, 230, MAGENTA, "  Start Game2");
     //Button hard(200, 250, 600, 350, MAGENTA, "  HARD");
     Button back(15, 425, 130, 465, BLUE, "BACK");
     while(true)
