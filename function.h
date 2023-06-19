@@ -36,6 +36,7 @@ void storeAvg(int x);
 void delay(unsigned int mseconds)
 {   
     //clock_t returns the number of clock ticks;  It is an arithmetic type
+    //clock_t is a type defined in the <ctime> head
     clock_t goal = mseconds+clock();//how many ticking in clock
     while(goal>clock());
 }
@@ -445,203 +446,226 @@ void storeAvg(int x)
     myfile.close();
 }
 
-void Record()
-{
-    setbkcolor(CYAN);
-    cleardevice();
-    vector<string>acc;
-    vector<string>sped1;
-    vector<string>avg;
+// void Record()
+// {
+//     setbkcolor(CYAN);
+//     cleardevice();
+//     vector<string>acc;
+//     vector<string>sped1;
+//     vector<string>avg;
 
-    acc=readDataFromFile("Previous Record.txt");
-    sped1=readDataFromFile("Previous RecordSpeed.txt");
-    avg=readDataFromFile("Avg.txt");
+//     acc=readDataFromFile("Previous Record.txt");
+//     sped1=readDataFromFile("Previous RecordSpeed.txt");
+//     avg=readDataFromFile("Avg.txt");
 
-    while(acc.size()>10)acc.erase(acc.begin());
-    while(sped1.size()>10)sped1.erase(sped1.begin());
-    while(avg.size()>10)avg.erase(avg.begin());
-
-
-
-    int n=acc.size();
-    int n1=sped1.size();
-    int n2=avg.size();
-
-    int a[n];
-    int b[n1];
-    int c[n2];
-    for(int i=0;i<n;i++)
-    {
-
-        a[i]=atoi(acc[i].c_str());
-        b[i]=atoi(sped1[i].c_str());
-        c[i]=atoi(avg[i].c_str());
-    }
-    int mx=c[0];
-    int j=0;
-    for(int i=0;i<n2;i++)
-    {
-       if(c[i]>=mx)
-       {
-           mx=c[i];
-           j=i;
-       }
-    }
-    j++;
-    char per[30] = "";
-    char day1[3] = "";
-
-    snprintf(day1, sizeof(day1), "%d", j);
-    strcat(per, "Best performance on ");
-    strcat(per, day1);
-    if(j==1)strcat(per, "st Day");
-    else if(j==2)strcat(per, "nd Day");
-    else if(j==3)strcat(per, "rd Day");
-    else strcat(per, "th Day");
-    //strcat(per, " Day");
-
-    //settextstyle(8, 0, 1);
-    new Field(200, 400, 700, 450,BLACK,WHITE ,per);
-    setbkcolor(CYAN);
-    //outtextxy(150,400,per);
-    //int a[5]={10,100,80,100,75};
-    ///For Accuracy:
-    settextstyle(6, 0, 4);
-    int Ax1=50,Ay1=320,Ax2=350,Ay2=320,Bx1=50,By1=320,Bx2=50,By2=20;
-    line(Ax1,Ay1,Ax2,Ay2);
-    line(Bx1,By1,Bx2,By2);
-
-    settextstyle(4, 0, 1);
-
-    char xaxis[30] = "";
-    char day[3] = "";
-
-    snprintf(day, sizeof(day), "%d", n);
-    strcat(xaxis, "Accuracy of Last ");
-    strcat(xaxis, day);
-    strcat(xaxis, " Days");
-
-    settextstyle(8, 0, 1);
-    outtextxy(Ax1-30,Ay1+40,xaxis);
-    outtextxy(Bx2-15,By2-20,"(%)");
-    for(int i=1;i<=10;i++)
-    {
-      line(Ax1-5, Ay1-i*30,Ax1+5,Ay1-i*30);
-      char dd[3] = "";
-
-        char d1[2]="";
-        snprintf(d1, sizeof(d1), "%d", i*10);
-        strcat(dd, d1);
-        strcat(dd, "0");
-        if(i==10)strcat(dd, "0");
-        outtextxy(Ax1-45,Ay1-i*30-10, dd);
+//     while(acc.size()>10)acc.erase(acc.begin());
+//     while(sped1.size()>10)sped1.erase(sped1.begin());
+//     while(avg.size()>10)avg.erase(avg.begin());
 
 
-    }
-    for(int i=1;i<=n;i++)
-    {
 
-        line(Ax1+i*30,Ay1-5,Ax1+i*30,Ay1+5);
-        char dd[3] = "";
-        strcat(dd, "d");
-        char d1[2]="";
-        snprintf(d1, sizeof(d1), "%d", i);
-        strcat(dd, d1);
-        if(i==10)strcat(dd,"0");
-        outtextxy(Ax1+i*30-14,Ay1+10, dd);
-    }
+//     int n=acc.size();
+//     int n1=sped1.size();
+//     int n2=avg.size();
 
+//     int a[n];
+//     int b[n1];
+//     int c[n2];
+//     for(int i=0;i<n;i++)
+//     {
 
-    int tm1=Ax1;
-    int tm2=Ay1;
+//         a[i]=atoi(acc[i].c_str());
+//         b[i]=atoi(sped1[i].c_str());
+//         c[i]=atoi(avg[i].c_str());
+//     }
+//     int mx=c[0];
+//     int j=0;
+//     for(int i=0;i<n2;i++)
+//     {
+//        if(c[i]>=mx)
+//        {
+//            mx=c[i];
+//            j=i;
+//        }
+//     }
+//     j++;
+//     char per[30] = "";
+//     char day1[3] = "";
 
-    for(int i=0;i<n;i++)
-    {
-        int p1,p2;
-        p1=Ax1+30*(i+1);
-        p2=Ay2-((By1-By2)/100)*a[i];
-        circle(p1,p2 ,3);
-        line(tm1,tm2,p1,p2);
-        setfillstyle(1,0);
-        floodfill(p1,p2,15);
-        tm1=p1;
-        tm2=p2;
-        //cout<<((By1-By2)/100)*a[i]<<endl;
-    }
-    ///For Speed:
-    Ax1=Ax2+70,Ay1=320,Ax2=Ax2*2+70,Ay2=320,Bx1=Ax1,By1=320,Bx2=350+70,By2=20;
-    line(Ax1,Ay1,Ax2,Ay2);
-    line(Bx1,By1,Bx2,By2);
+//     snprintf(day1, sizeof(day1), "%d", j);
+//     // per+="Best performance on ";
+//     // per+=day1;
+//     // if(j==1)strcat(per, "st Day");
+//     // else if(j==2)strcat(per, "nd Day");
+//     // else if(j==3)strcat(per, "rd Day");
+//     // else strcat(per, "th Day");
 
-    char xaxis1[30] = "";
-    //day[3] = "";
-
-    snprintf(day, sizeof(day), "%d", n1);
-    strcat(xaxis1, "Speed of Last ");
-    strcat(xaxis1, day);
-    strcat(xaxis1, " Days");
-
-    settextstyle(8, 0, 1);
-    outtextxy(Ax1+30,Ay1+40,xaxis1);
-    //outtextxy(Bx2-15,By2-20,"(%)");
-
-    for(int i=1;i<=n1;i++)
-    {
-
-        line(Ax1+i*30,Ay1-5,Ax1+i*30,Ay1+5);
-        char dd[3] = "";
-        strcat(dd, "d");
-        char d1[2]="";
-        snprintf(d1, sizeof(d1), "%d", i);
-        strcat(dd, d1);
-        if(i==10)strcat(dd,"0");
-        outtextxy(Ax1+i*30-14,Ay1+10, dd);
-    }
-    for(int i=1;i<=10;i++)
-    {
-       line(Ax1-5, Ay1-i*30,Ax1+5,Ay1-i*30);
-       char dd[3] = "";
-
-        char d1[2]="";
-        snprintf(d1, sizeof(d1), "%d", i*10);
-        strcat(dd, d1);
-        strcat(dd, "0");
-        if(i==10)strcat(dd, "0");
-        outtextxy(Ax1-45,Ay1-i*30-10, dd);
+    
+//     // strcat(per, "Best performance on ");
+//     // strcat(per, day1);
+//     // if(j==1)strcat(per, "st Day");
+//     // else if(j==2)strcat(per, "nd Day");
+//     // else if(j==3)strcat(per, "rd Day");
+//     // else strcat(per, "th Day");
 
 
-    }
-    tm1=Ax1;
-    tm2=Ay1;
 
-    for(int i=0;i<n;i++)
-    {
-        int p1,p2;
-        p1=Ax1+30*(i+1);
-        p2=Ay2-((By1-By2)/100)*b[i];
-        circle(p1,p2 ,3);
-        line(tm1,tm2,p1,p2);
-        setfillstyle(1,0);
-        floodfill(p1,p2,15);
-        tm1=p1;
-        tm2=p2;
-        //cout<<((By1-By2)/100)*a[i]<<endl;
-    }
-    settextstyle(6, 0, 3);
-    Button back(15, 425, 130, 465, BLUE, "BACK");
 
-    while(true)
-    {
-        back.hover(GREEN);
 
-        if(GetAsyncKeyState(VK_LBUTTON) & (0x8000 != 0))
-        {
-            if(back.cursor())menu();
 
-        }
-        if(kbhit()) getch();
-    }
-}
+//     // new Field(200, 400, 700, 450,BLACK,WHITE ,per);
+//     // setbkcolor(CYAN);
+
+
+//     //#########################################For Accuracy:
+//     // settextstyle(6, 0, 4);
+//     // int Ax1=50,Ay1=320,Ax2=350,Ay2=320,Bx1=50,By1=320,Bx2=50,By2=20;
+//     // line(Ax1,Ay1,Ax2,Ay2);
+//     // line(Bx1,By1,Bx2,By2);
+
+//     // settextstyle(4, 0, 1);
+
+//     // char xaxis[30] = "";
+//     // char day[3] = "";
+
+//     // snprintf(day, sizeof(day), "%d", n);
+//     // strcat(xaxis, "Accuracy of Last ");
+//     // strcat(xaxis, day);
+//     // strcat(xaxis, " Days");
+
+//     // settextstyle(8, 0, 1);
+//     // outtextxy(Ax1-30,Ay1+40,xaxis);
+//     // outtextxy(Bx2-15,By2-20,"(%)");
+//     // for(int i=1;i<=10;i++)
+//     // {
+//     //   line(Ax1-5, Ay1-i*30,Ax1+5,Ay1-i*30);
+//     //   char dd[3] = "";
+
+//     //     char d1[2]="";
+//     //     snprintf(d1, sizeof(d1), "%d", i*10);
+//     //     strcat(dd, d1);
+//     //     strcat(dd, "0");
+//     //     if(i==10)strcat(dd, "0");
+//     //     outtextxy(Ax1-45,Ay1-i*30-10, dd);
+
+
+//     // }
+//     // for(int i=1;i<=n;i++)
+//     // {
+
+//     //     line(Ax1+i*30,Ay1-5,Ax1+i*30,Ay1+5);
+//     //     char dd[3] = "";
+//     //     strcat(dd, "d");
+//     //     char d1[2]="";
+//     //     snprintf(d1, sizeof(d1), "%d", i);
+//     //     strcat(dd, d1);
+//     //     if(i==10)strcat(dd,"0");
+//     //     outtextxy(Ax1+i*30-14,Ay1+10, dd);
+//     // }
+
+
+//     // int tm1=Ax1;
+//     // int tm2=Ay1;
+
+//     // for(int i=0;i<n;i++)
+//     // {
+//     //     int p1,p2;
+//     //     p1=Ax1+30*(i+1);
+//     //     p2=Ay2-((By1-By2)/100)*a[i];
+//     //     circle(p1,p2 ,3);
+//     //     line(tm1,tm2,p1,p2);
+//     //     setfillstyle(1,0);
+//     //     floodfill(p1,p2,15);
+//     //     tm1=p1;
+//     //     tm2=p2;
+//     //     //cout<<((By1-By2)/100)*a[i]<<endl;
+//     // }
+
+
+
+
+//     //##################################For Speed:
+//     // Ax1=Ax2+70,Ay1=320,Ax2=Ax2*2+70,Ay2=320,Bx1=Ax1,By1=320,Bx2=350+70,By2=20;
+//     // line(Ax1,Ay1,Ax2,Ay2);
+//     // line(Bx1,By1,Bx2,By2);
+
+//     // char xaxis1[30] = "";
+//     // //day[3] = "";
+
+//     // snprintf(day, sizeof(day), "%d", n1);
+//     // strcat(xaxis1, "Speed of Last ");
+//     // strcat(xaxis1, day);
+//     // strcat(xaxis1, " Days");
+
+//     // settextstyle(8, 0, 1);
+//     // outtextxy(Ax1+30,Ay1+40,xaxis1);
+//     // //outtextxy(Bx2-15,By2-20,"(%)");
+
+//     // for(int i=1;i<=n1;i++)
+//     // {
+
+//     //     line(Ax1+i*30,Ay1-5,Ax1+i*30,Ay1+5);
+//     //     char dd[3] = "";
+//     //     strcat(dd, "d");
+//     //     char d1[2]="";
+//     //     snprintf(d1, sizeof(d1), "%d", i);
+//     //     strcat(dd, d1);
+//     //     if(i==10)strcat(dd,"0");
+//     //     outtextxy(Ax1+i*30-14,Ay1+10, dd);
+//     // }
+//     // for(int i=1;i<=10;i++)
+//     // {
+//     //    line(Ax1-5, Ay1-i*30,Ax1+5,Ay1-i*30);
+//     //    char dd[3] = "";
+
+//     //     char d1[2]="";
+//     //     snprintf(d1, sizeof(d1), "%d", i*10);
+//     //     strcat(dd, d1);
+//     //     strcat(dd, "0");
+//     //     if(i==10)strcat(dd, "0");
+//     //     outtextxy(Ax1-45,Ay1-i*30-10, dd);
+
+
+//     // }
+//     // tm1=Ax1;
+//     // tm2=Ay1;
+
+
+
+//     // for(int i=0;i<n;i++)
+//     // {
+//     //     int p1,p2;
+//     //     p1=Ax1+30*(i+1);
+//     //     p2=Ay2-((By1-By2)/100)*b[i];
+//     //     circle(p1,p2 ,3);
+//     //     line(tm1,tm2,p1,p2);
+//     //     setfillstyle(1,0);
+//     //     floodfill(p1,p2,15);
+//     //     tm1=p1;
+//     //     tm2=p2;
+//     //     //cout<<((By1-By2)/100)*a[i]<<endl;
+//     //     cout<<"dd44444444444444444ffd"<<endl;
+//     // }
+
+
+
+
+
+//     settextstyle(6, 0, 3);
+//     Button back(15, 425, 130, 465, BLUE, "BACK");
+
+//     while(true)
+//     {
+//         back.hover(GREEN);
+
+//         if(GetAsyncKeyState(VK_LBUTTON) & (0x8000 != 0))
+//         {
+//             if(back.cursor())menu();
+
+//         }
+//         if(kbhit()) getch();
+//     }
+// }
 void exit()
 {
     setbkcolor(BLACK);
@@ -667,7 +691,7 @@ void exit()
 void menu()
 {
 
-    setbkcolor(DARKGRAY);
+    setbkcolor(CYAN);
     cleardevice();
     settextstyle(6, 0, 4);
     new Field(0, 0, 800, 70, GREEN,BLACK, "MAIN MENU");
@@ -705,7 +729,7 @@ void menu()
 void login()
 {
 
-    setbkcolor(CYAN);
+    setbkcolor(LIGHTCYAN);
     cleardevice();
 
     settextstyle(6, 0, 4);
@@ -713,7 +737,7 @@ void login()
     settextstyle(8, 0, 2);
     new Field(100, 350, 350, 400, GREEN,WHITE, "ENTER YOUR NAME");
     Input userName;//creating input object from the ui.h
-    userName.Name(350, 250,700, 400);//left,top,right,bottom
+    userName.Name(350, 350,700, 400);//left,top,right,bottom
     Button submit(370,430,450,480, BLUE, "OK");
 
     while(true)
