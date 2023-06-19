@@ -1,0 +1,18 @@
+# depslib dependency file v1.0
+1639161789 source:d:\typing master\main.cpp
+	"function.h"
+	<graphics.h>
+	<bits/stdc++.h>
+	<stdlib.h>
+
+1639161774 d:\typing master\function.h
+	"ui.h"
+	<graphics.h>
+	<bits/stdc++.h>
+	<stdlib.h>
+
+1639161683 d:\typing master\ui.h
+	<graphics.h>
+	<bits/stdc++.h>
+	<stdlib.h>
+
