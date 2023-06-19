@@ -34,8 +34,9 @@ void storeAvg(int x);
 
 
 void delay(unsigned int mseconds)
-{
-    clock_t goal = mseconds+clock();
+{   
+    //clock_t returns the number of clock ticks;  It is an arithmetic type
+    clock_t goal = mseconds+clock();//how many ticking in clock
     while(goal>clock());
 }
 
@@ -710,9 +711,9 @@ void login()
     settextstyle(6, 0, 4);
     new Field(0,0,800,80,BLACK,WHITE,"WELCOME TO TYPING GAME");
     settextstyle(8, 0, 2);
-    new Field(100, 350, 350, 400, GREEN,WHITE, "<ENTER YOUR NAME>");
-    Input userName;
-    userName.Name(350, 350,700, 400);
+    new Field(100, 350, 350, 400, GREEN,WHITE, "ENTER YOUR NAME");
+    Input userName;//creating input object from the ui.h
+    userName.Name(350, 250,700, 400);//left,top,right,bottom
     Button submit(370,430,450,480, BLUE, "OK");
 
     while(true)
