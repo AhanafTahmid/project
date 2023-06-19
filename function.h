@@ -108,8 +108,8 @@ void startPracticing(int lavel, int time_limit)
     settextstyle(4, 0, 3);//void settextstyle(int font, int direction, int font_size);
 
     vector<string>words;
-    if(lavel == 1) words = readDataFromFile("lavel1.txt");
-    else words = readDataFromFile("lavel2.txt");
+    if(lavel == 1) words = readDataFromFile("level1.txt");
+    else words = readDataFromFile("level2.txt");
 
     int length = words.size();
     string rand_word  = words[rand() % length];
