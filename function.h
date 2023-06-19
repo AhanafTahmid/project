@@ -144,6 +144,7 @@ void startPracticing(int lavel, int time_limit)
         stor.hover(8);
         //GetAsyncKeyState checks if the left mouse button is pressed using the GetAsyncKeyState 
         //GetAsyncKeyState is for seeing where the mouse is moving
+        //it will check whether a key is pressed or not.
         if(GetAsyncKeyState(VK_LBUTTON) & (0x8000 != 0))
         {
             if(re_start.cursor())
