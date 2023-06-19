@@ -1,4 +1,3 @@
-//https://github.com/IsratJahanR/Typing-game-project-with-cpp
 #include "function.h"
 #include <graphics.h>
 //#include <bits/stdc++.h>
@@ -15,7 +14,7 @@ int main()
 
     login();//getting from function.h
 
-    getch();//clear the unnecessary things
+    getch();//freeze the screen
 
     return 0;
 }

@@ -56,7 +56,7 @@ class Input : public Field
 {
 private:
     int x, y, time_limit;
-    clock_t begin;   ///clock_t is used to measure processor and CPU time
+    clock_t begin;   //clock_t is used to measure processor and CPU time
     int prev_sec;
     bool isDisplayTime;
     bool isPinInput;

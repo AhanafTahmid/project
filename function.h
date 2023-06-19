@@ -1,9 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
 #include <graphics.h>
-
-//#include <stdlib.h>
-
 //for the button and field
 #include "ui.h"
 
@@ -36,7 +33,7 @@ void storeAvg(int x);
 
 
 void delay(unsigned int mseconds)
-{   
+{
     //clock_t returns the number of clock ticks;  It is an arithmetic type
     //clock_t is a type defined in the <ctime> head
     clock_t goal = mseconds+clock();//how many ticking in clock
@@ -83,10 +80,11 @@ vector<string> readDataFromFile(char* fileName)
 void startPracticing(int lavel, int time_limit)
 {
 
+    //graphics.h function
     cleardevice();
     frame();
     //creating the parameterized object of Field from ui.h
-    new Field(16, 0, 200, 40, BLUE, WHITE, "Time Left");
+    new Field(16, 0, 200, 40, BLUE, WHITE, "Time Left");//Field(int left, int top, int right, int bottom, int bgColor, int textColor, char* title)
     new Field(200, 0, 350, 40, BLUE, WHITE, "Correct");
     new Field(350, 0, 480, 40, BLUE, WHITE, "Wrong");
     new Field(480, 0, 650, 40, BLUE, WHITE, "Accuracy");
@@ -131,8 +129,7 @@ void startPracticing(int lavel, int time_limit)
 
     Button back_button(15, 350, 250, 460, MAGENTA, "BACK");
     Button re_start(251, 350, 500, 460, CYAN, "RE-START");
-    Button next(501, 350, 783, 460, MAGENTA, "NEXT LABEL");
-    Button stor(600, 300, 750,340,7, "STORE");
+    Button next(501, 350, 783, 460, MAGENTA, "NEXT LEVEL");
 
 
     char typed_word[50] = "";
@@ -147,8 +144,7 @@ void startPracticing(int lavel, int time_limit)
         re_start.hover(GREEN);
         back_button.hover(GREEN);
         next.hover(GREEN);
-        stor.hover(8);
-        //GetAsyncKeyState checks if the left mouse button is pressed using the GetAsyncKeyState 
+        //GetAsyncKeyState checks if the left mouse button is pressed using the GetAsyncKeyState
         //GetAsyncKeyState is for seeing where the mouse is moving
         //it will check whether a key is pressed or not.
         if(GetAsyncKeyState(VK_LBUTTON) & (0x8000 != 0))
@@ -170,7 +166,7 @@ void startPracticing(int lavel, int time_limit)
                 else if(lavel==2)Easy2();
                 return;
             }
-            else if(stor.cursor() && !isStore)
+//            else if(stor.cursor() && !isStore)
             {
 
                storeAcc(Ac);
@@ -256,31 +252,13 @@ void startPracticing(int lavel, int time_limit)
 
 }
 
-/*
-void loading()
-{
-    setbkcolor(DARKGRAY);
-    cleardevice();
-    frame();
-    settextstyle(4, 0, 4);
-    settextstyle(GOTHIC_FONT, HORIZ_DIR, 1);
-    outtextxy(400 - textwidth("Loading, Please Wait...")/2, 180, "Loading, Pleas Wait...");
-
-    for(int i=300; i<450; i++)
-    {
-        delay(15);
-        line(i,210,i,230);
-    }
-
-}
-*/
 
 void Header()
 {
     // Header Section
 
 
-    //https://www.geeksforgeeks.org/setcolor-function-c
+
     //Set text color
     setcolor(BLACK);
     //set background color
@@ -427,36 +405,6 @@ void storeAvg(int x)
 //Main game function for the second game
 
 
-// void Easy2()
-// {
-//     cleardevice();
-//     frame();
-
-//     Footer();
-//     new Field(0, 0, 800, 50, MAGENTA,WHITE, "Game 2");
-//     Button char_one_mnt(200, 130, 600, 230, CYAN, "Start");
-//    // Button char_two_mnt(200, 230, 600, 330, MAGENTA, "Label 2");
-//     //Button char_five_mnt(200, 330, 600, 430, CYAN, "Label 3");
-//     Button back(15, 425, 130, 465, BLUE, "BACK");
-//     while(true)
-//     {
-//         char_one_mnt.hover(RED);
-//         //char_two_mnt.hover(BLUE);
-//         //char_five_mnt.hover(RED);
-//         back.hover(GREEN);
-
-//         if(GetAsyncKeyState(VK_LBUTTON) & (0x8000 != 0))
-//         {
-//             if(char_one_mnt.cursor())  startPracticing(1, 60);
-//             //else if(char_two_mnt.cursor()) startPracticing(1, 120);
-//             //else if(char_five_mnt.cursor())startPracticing(1,300);
-//             else if(back.cursor())game1_start();
-//         }
-//         if(kbhit()) getch();//until any key is pressed it is paused
-//     }
-//}
-
-
 
 void Easy2()
 {
@@ -464,7 +412,7 @@ void Easy2()
     cleardevice();
     frame();
     Footer();
-    new Field(0, 0, 800, 50, MAGENTA,WHITE, "Hard Labels");
+    new Field(0, 0, 800, 50, MAGENTA,WHITE, "Hard Lavels");
 
 
     Button word_one_mnt(200, 130, 600, 230, CYAN, "Label 1");
@@ -517,231 +465,6 @@ void game2_start()
         }
     }
 }
-
-
-
-
-
-// void Record()
-// {
-//     setbkcolor(CYAN);
-//     cleardevice();
-//     vector<string>acc;
-//     vector<string>sped1;
-//     vector<string>avg;
-
-//     acc=readDataFromFile("Previous Record.txt");
-//     sped1=readDataFromFile("Previous RecordSpeed.txt");
-//     avg=readDataFromFile("Avg.txt");
-
-//     while(acc.size()>10)acc.erase(acc.begin());
-//     while(sped1.size()>10)sped1.erase(sped1.begin());
-//     while(avg.size()>10)avg.erase(avg.begin());
-
-
-
-//     int n=acc.size();
-//     int n1=sped1.size();
-//     int n2=avg.size();
-
-//     int a[n];
-//     int b[n1];
-//     int c[n2];
-//     for(int i=0;i<n;i++)
-//     {
-
-//         a[i]=atoi(acc[i].c_str());
-//         b[i]=atoi(sped1[i].c_str());
-//         c[i]=atoi(avg[i].c_str());
-//     }
-//     int mx=c[0];
-//     int j=0;
-//     for(int i=0;i<n2;i++)
-//     {
-//        if(c[i]>=mx)
-//        {
-//            mx=c[i];
-//            j=i;
-//        }
-//     }
-//     j++;
-//     char per[30] = "";
-//     char day1[3] = "";
-
-//     snprintf(day1, sizeof(day1), "%d", j);
-//     // per+="Best performance on ";
-//     // per+=day1;
-//     // if(j==1)strcat(per, "st Day");
-//     // else if(j==2)strcat(per, "nd Day");
-//     // else if(j==3)strcat(per, "rd Day");
-//     // else strcat(per, "th Day");
-
-    
-//     // strcat(per, "Best performance on ");
-//     // strcat(per, day1);
-//     // if(j==1)strcat(per, "st Day");
-//     // else if(j==2)strcat(per, "nd Day");
-//     // else if(j==3)strcat(per, "rd Day");
-//     // else strcat(per, "th Day");
-
-
-
-
-
-
-//     // new Field(200, 400, 700, 450,BLACK,WHITE ,per);
-//     // setbkcolor(CYAN);
-
-
-//     //#########################################For Accuracy:
-//     // settextstyle(6, 0, 4);
-//     // int Ax1=50,Ay1=320,Ax2=350,Ay2=320,Bx1=50,By1=320,Bx2=50,By2=20;
-//     // line(Ax1,Ay1,Ax2,Ay2);
-//     // line(Bx1,By1,Bx2,By2);
-
-//     // settextstyle(4, 0, 1);
-
-//     // char xaxis[30] = "";
-//     // char day[3] = "";
-
-//     // snprintf(day, sizeof(day), "%d", n);
-//     // strcat(xaxis, "Accuracy of Last ");
-//     // strcat(xaxis, day);
-//     // strcat(xaxis, " Days");
-
-//     // settextstyle(8, 0, 1);
-//     // outtextxy(Ax1-30,Ay1+40,xaxis);
-//     // outtextxy(Bx2-15,By2-20,"(%)");
-//     // for(int i=1;i<=10;i++)
-//     // {
-//     //   line(Ax1-5, Ay1-i*30,Ax1+5,Ay1-i*30);
-//     //   char dd[3] = "";
-
-//     //     char d1[2]="";
-//     //     snprintf(d1, sizeof(d1), "%d", i*10);
-//     //     strcat(dd, d1);
-//     //     strcat(dd, "0");
-//     //     if(i==10)strcat(dd, "0");
-//     //     outtextxy(Ax1-45,Ay1-i*30-10, dd);
-
-
-//     // }
-//     // for(int i=1;i<=n;i++)
-//     // {
-
-//     //     line(Ax1+i*30,Ay1-5,Ax1+i*30,Ay1+5);
-//     //     char dd[3] = "";
-//     //     strcat(dd, "d");
-//     //     char d1[2]="";
-//     //     snprintf(d1, sizeof(d1), "%d", i);
-//     //     strcat(dd, d1);
-//     //     if(i==10)strcat(dd,"0");
-//     //     outtextxy(Ax1+i*30-14,Ay1+10, dd);
-//     // }
-
-
-//     // int tm1=Ax1;
-//     // int tm2=Ay1;
-
-//     // for(int i=0;i<n;i++)
-//     // {
-//     //     int p1,p2;
-//     //     p1=Ax1+30*(i+1);
-//     //     p2=Ay2-((By1-By2)/100)*a[i];
-//     //     circle(p1,p2 ,3);
-//     //     line(tm1,tm2,p1,p2);
-//     //     setfillstyle(1,0);
-//     //     floodfill(p1,p2,15);
-//     //     tm1=p1;
-//     //     tm2=p2;
-//     //     //cout<<((By1-By2)/100)*a[i]<<endl;
-//     // }
-
-
-
-
-//     //##################################For Speed:
-//     // Ax1=Ax2+70,Ay1=320,Ax2=Ax2*2+70,Ay2=320,Bx1=Ax1,By1=320,Bx2=350+70,By2=20;
-//     // line(Ax1,Ay1,Ax2,Ay2);
-//     // line(Bx1,By1,Bx2,By2);
-
-//     // char xaxis1[30] = "";
-//     // //day[3] = "";
-
-//     // snprintf(day, sizeof(day), "%d", n1);
-//     // strcat(xaxis1, "Speed of Last ");
-//     // strcat(xaxis1, day);
-//     // strcat(xaxis1, " Days");
-
-//     // settextstyle(8, 0, 1);
-//     // outtextxy(Ax1+30,Ay1+40,xaxis1);
-//     // //outtextxy(Bx2-15,By2-20,"(%)");
-
-//     // for(int i=1;i<=n1;i++)
-//     // {
-
-//     //     line(Ax1+i*30,Ay1-5,Ax1+i*30,Ay1+5);
-//     //     char dd[3] = "";
-//     //     strcat(dd, "d");
-//     //     char d1[2]="";
-//     //     snprintf(d1, sizeof(d1), "%d", i);
-//     //     strcat(dd, d1);
-//     //     if(i==10)strcat(dd,"0");
-//     //     outtextxy(Ax1+i*30-14,Ay1+10, dd);
-//     // }
-//     // for(int i=1;i<=10;i++)
-//     // {
-//     //    line(Ax1-5, Ay1-i*30,Ax1+5,Ay1-i*30);
-//     //    char dd[3] = "";
-
-//     //     char d1[2]="";
-//     //     snprintf(d1, sizeof(d1), "%d", i*10);
-//     //     strcat(dd, d1);
-//     //     strcat(dd, "0");
-//     //     if(i==10)strcat(dd, "0");
-//     //     outtextxy(Ax1-45,Ay1-i*30-10, dd);
-
-
-//     // }
-//     // tm1=Ax1;
-//     // tm2=Ay1;
-
-
-
-//     // for(int i=0;i<n;i++)
-//     // {
-//     //     int p1,p2;
-//     //     p1=Ax1+30*(i+1);
-//     //     p2=Ay2-((By1-By2)/100)*b[i];
-//     //     circle(p1,p2 ,3);
-//     //     line(tm1,tm2,p1,p2);
-//     //     setfillstyle(1,0);
-//     //     floodfill(p1,p2,15);
-//     //     tm1=p1;
-//     //     tm2=p2;
-//     //     //cout<<((By1-By2)/100)*a[i]<<endl;
-//     //     cout<<"dd44444444444444444ffd"<<endl;
-//     // }
-
-
-
-
-
-//     settextstyle(6, 0, 3);
-//     Button back(15, 425, 130, 465, BLUE, "BACK");
-
-//     while(true)
-//     {
-//         back.hover(GREEN);
-
-//         if(GetAsyncKeyState(VK_LBUTTON) & (0x8000 != 0))
-//         {
-//             if(back.cursor())menu();
-
-//         }
-//         if(kbhit()) getch();
-//     }
-// }
 void exit()
 {
     setbkcolor(BLACK);
@@ -775,24 +498,24 @@ void menu()
     Footer();
 
     ////left,top,right,bottom
-    Button game1(200, 75, 600, 135, MAGENTA, "  Game 1");
+    Button game1(200, 95, 600, 165, MAGENTA, "  Game 1");
     //Button aboutMe(200, 175, 600, 245, BLUE, "  Game 2");
-    Button game2(200, 140, 600, 200, BLUE, "Game 2");
-    Button game3(200, 205, 600, 265, BLUE, "Game 3");
-    Button game4(200, 270, 600, 330, BLUE, "Game 4");
-    Button aboutMe(200, 335, 600, 395, BLUE, "  About Us");
+    Button game2(200, 170, 600, 240, BLUE, "Game 2");
+    //Button game3(200, 205, 600, 265, BLUE, "Game 1(Hard)");
+    //Button game4(200, 270, 600, 330, BLUE, "Game 2(Hard)");
+    Button aboutMe(200, 245, 600, 315, BLUE, "  About Us");
     //Button preb(200, 250, 600, 320, BLUE, "PREVIOUS RECORDs");
-    Button ext(200, 400, 600, 460, RED, "  EXIT");
+    Button ext(200, 320, 600, 390, RED, "  EXIT");
 
     while(true)
     {
         //hovering over menu
         game1.hover(GREEN);
         game2.hover(GREEN);
-        game3.hover(GREEN);
+       // game3.hover(GREEN);
         aboutMe.hover(GREEN);
         ext.hover(GREEN);
-    
+
         //pressing the windows
         if(GetAsyncKeyState(VK_LBUTTON) & (0x8000 != 0))
         {
@@ -800,7 +523,7 @@ void menu()
             else if(game2.cursor())game2_start();
             else if(aboutMe.cursor()) about_us();
             else if(ext.cursor()) exit();
-           
+
 
         }
     }
