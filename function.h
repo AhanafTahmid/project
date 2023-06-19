@@ -20,11 +20,12 @@ void Easy();
 //void loading();
 void scoreGame();
 void setTime();
-void rules();//it is the about us page
+void about_us();//it is the about us page
 void exit();
 void menu();
 void setTime();
-void startGame();
+void game1_start();
+void game2_start();
 void Hard();
 void Header();
 void Footer();
@@ -76,6 +77,8 @@ vector<string> readDataFromFile(char* fileName)
     return words;
 }
 
+
+//This is the game
 void startPracticing(int lavel, int time_limit)
 {
 
@@ -305,7 +308,7 @@ void Footer()
     outtextxy(400 - textwidth("Developed By Spartan")/2, 485 - textheight("A") / 2, "Developed By Spartan");
     settextstyle(GOTHIC_FONT, HORIZ_DIR, 3);
 }
-void startGame()
+void game1_start()
 {
     cleardevice();
      frame();
@@ -331,6 +334,8 @@ void startGame()
         }
     }
 }
+
+
 void Hard()
 {
     //loading();
@@ -359,9 +364,9 @@ void Hard()
             if(word_one_mnt.cursor())  startPracticing(2, 60);
            else if(word_two_mnt.cursor()) startPracticing(2, 120);
            else if(word_five_mnt.cursor()) startPracticing(2, 300);
-           else if(back.cursor())startGame();
+           else if(back.cursor())game1_start();
         }
-        if(kbhit()) getch();
+        if(kbhit()) getch();//kbhit determines if a key has been pressed or not
     }
 }
 void Easy()
@@ -387,12 +392,12 @@ void Easy()
             if(char_one_mnt.cursor())  startPracticing(1, 60);
             else if(char_two_mnt.cursor()) startPracticing(1, 120);
             else if(char_five_mnt.cursor())startPracticing(1,300);
-            else if(back.cursor())startGame();
+            else if(back.cursor())game1_start();
         }
         if(kbhit()) getch();
     }
 }
-void rules()
+void about_us()
 {
     setbkcolor(DARKGRAY);
     cleardevice();
@@ -401,11 +406,11 @@ void rules()
     settextstyle(6, 0, 4);
     new Field(0, 0, 800, 70, GREEN,BLACK,"About Us");
     settextstyle(8, 0, 1);
-    new Field(15, 200, 785, 230, CYAN,WHITE ,"1.Type Your Name 1st and click \"OK\" ");
-    new Field(15, 230, 785, 260, CYAN,WHITE ,"2.If you are Interested to play , press \"START GAME\" ");
-    new Field(15, 260, 785, 290, CYAN,WHITE ,"3.select the level ");
-    new Field(15, 290, 785, 320, CYAN,WHITE ,"4.Lets Play ");
-    new Field(15, 320, 785, 350, CYAN,WHITE ,"5.Avoid incorrect typing and you will seen your typing speed");
+    new Field(15, 200, 785, 230, CYAN,WHITE ,"Team Members");
+    new Field(15, 230, 785, 260, CYAN,WHITE ,"Team Leader: Ahanaf");
+    new Field(15, 260, 785, 290, CYAN,WHITE ,"Member 1: Evan");
+    new Field(15, 290, 785, 320, CYAN,WHITE ,"Member 2: Dihan");
+    new Field(15, 320, 785, 350, CYAN,WHITE ,"Member 3: Irtisum");
     settextstyle(8, 0, 2);
     Button back(15, 425, 130, 465, BLUE, "BACK");
     while(true)
@@ -445,6 +450,68 @@ void storeAvg(int x)
     myfile<<x<<" ";
     myfile.close();
 }
+
+
+
+
+//For game 2
+//Main game function for the second game
+void Easy2()
+{
+    cleardevice();
+    frame();
+
+    Footer();
+    new Field(0, 0, 800, 50, MAGENTA,WHITE, "Game 2");
+    Button char_one_mnt(200, 130, 600, 230, CYAN, "Start");
+   // Button char_two_mnt(200, 230, 600, 330, MAGENTA, "Label 2");
+    //Button char_five_mnt(200, 330, 600, 430, CYAN, "Label 3");
+    Button back(15, 425, 130, 465, BLUE, "BACK");
+    while(true)
+    {
+        char_one_mnt.hover(RED);
+        //char_two_mnt.hover(BLUE);
+        //char_five_mnt.hover(RED);
+        back.hover(GREEN);
+
+        if(GetAsyncKeyState(VK_LBUTTON) & (0x8000 != 0))
+        {
+            if(char_one_mnt.cursor())  startPracticing(1, 60);
+            //else if(char_two_mnt.cursor()) startPracticing(1, 120);
+            //else if(char_five_mnt.cursor())startPracticing(1,300);
+            else if(back.cursor())game1_start();
+        }
+        if(kbhit()) getch();//until any key is pressed it is paused
+    }
+}
+
+void game2_start()
+{
+    cleardevice();
+     frame();
+     Header();
+     Footer();
+    //creating the parameterized object from ui.h
+    Button easy(200, 130, 600, 230, MAGENTA, "  Type word by word");
+    //Button hard(200, 250, 600, 350, MAGENTA, "  HARD");
+    Button back(15, 425, 130, 465, BLUE, "BACK");
+    while(true)
+    {
+        easy.hover(GREEN);
+        //hard.hover(GREEN);
+        back.hover(GREEN);
+        if(GetAsyncKeyState(VK_LBUTTON) & (0x8000 != 0))
+        {
+            if(easy.cursor()) Easy2();
+            //else if(hard.cursor())Hard();
+            else if(back.cursor())menu();
+        }
+    }
+}
+
+
+
+
 
 // void Record()
 // {
@@ -698,34 +765,41 @@ void menu()
 
     Footer();
 
-    Button start(200, 100, 600, 170, MAGENTA, "  Game 1");
+    Button game1(200, 100, 600, 170, MAGENTA, "  Game 1");
     //Button aboutMe(200, 175, 600, 245, BLUE, "  Game 2");
-    Button aboutMe(200, 175, 600, 245, BLUE, "  About Us");
-    Button preb(200, 250, 600, 320, BLUE, "PREVIOUS RECORDs");
-    Button ext(200, 325, 600, 395, RED, "  EXIT");
+    Button game2(200, 175, 600, 245, BLUE, "Game 2");
+    Button game3(200, 250, 600, 320, BLUE, "Game 3");
+    //Button preb(200, 250, 600, 320, BLUE, "Game 3");
+    Button aboutMe(200, 325, 600, 395, BLUE, "  About Us");
+    //Button preb(200, 250, 600, 320, BLUE, "PREVIOUS RECORDs");
+    Button ext(200, 400, 600, 470, RED, "  EXIT");
 
     while(true)
     {
-        //
-        start.hover(GREEN);
+        //hovering over menu
+        game1.hover(GREEN);
+        game2.hover(GREEN);
+        game3.hover(GREEN);
         aboutMe.hover(GREEN);
         ext.hover(GREEN);
-        preb.hover(GREEN);
+    
+        //pressing the windows
         if(GetAsyncKeyState(VK_LBUTTON) & (0x8000 != 0))
         {
-            if(start.cursor()) startGame();
-            else if(aboutMe.cursor()) rules();
+            if(game1.cursor()) game1_start();
+            else if(game2.cursor())game2_start();
+            else if(aboutMe.cursor()) about_us();
             else if(ext.cursor()) exit();
-            else if(preb.cursor())Record();
-
+           
 
         }
     }
-
-
-
-
 }
+
+
+
+
+
 void login()
 {
 
