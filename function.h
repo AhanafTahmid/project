@@ -29,13 +29,6 @@ void storeSpeed(int x);
 void storeAvg(int x);
 
 
-void delay(unsigned int mseconds)
-{
-    //clock_t returns the number of clock ticks;  It is an arithmetic type
-    //clock_t is a type defined in the <ctime> head
-    clock_t goal = mseconds+clock();//how many ticking in clock
-    while(goal>clock());
-}
 
 
 void frame()
