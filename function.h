@@ -166,7 +166,7 @@ void startPracticing(int lavel, int time_limit)
 //            else if(stor.cursor() && !isStore)
             {
 
-               storeAcc(Ac);
+               //storeAcc(Ac);
                storeSpeed(spd);
                storeAvg((Ac+spd)/2);
                spd=0;

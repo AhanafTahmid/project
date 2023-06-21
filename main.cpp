@@ -1,5 +1,5 @@
 #include "function.h"
-#include <graphics.h>
+//#include <graphics.h>
 //#include <bits/stdc++.h>
 //#include <stdlib.h>
 //using namespace std;
